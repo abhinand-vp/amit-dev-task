@@ -28,7 +28,7 @@ export default function PaymentSuccess({
         <button
           className="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300 transition duration-300"
         >
-          Go to HomePage
+          Conform your Orders
         </button>
       </div>
     </div>

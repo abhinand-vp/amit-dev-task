@@ -7,8 +7,11 @@ import {
   PaymentElement,
 } from "@stripe/react-stripe-js";
 import convertToSubcurrency from "@/lib/convertToSubcurrency";
+import { useRouter } from 'next/navigation'
+
 
 const CheckoutPage = ({ amount }: { amount: number }) => {
+  const router = useRouter()
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -47,17 +50,14 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `${process.env.REACT_APP_BASE_URL}/payment-success?amount=${amount}`,
+        return_url: `https://amit-dev-task-zkmp.vercel.app/payment-success?amount=${amount}`,
       },
     });
 
     if (error) {
-      // This point is only reached if there's an immediate error when
-      // confirming the payment. Show the error to your customer (for example, payment details incomplete)
       setErrorMessage(error.message);
+      router.push('/')
     } else {
-      // The payment UI automatically closes with a success animation.
-      // Your customer is redirected to your `return_url`.
     }
 
     setLoading(false);
